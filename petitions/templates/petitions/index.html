@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Petitions</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Create Petition</button>
+</form>
+
+<hr>
+
+<ul>
+  {% for p in petitions %}
+    <li>
+      <a href="{% url 'petitions:detail' p.pk %}">{{ p.movie_title }}</a>
+      (Yes: {{ p.yes_count }})
+    </li>
+  {% empty %}
+    <li>No petitions yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

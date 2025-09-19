@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4">
+  <h2>My Subscription</h2>
+
+  <p><strong>Total spent:</strong> ${{ total_spent }}</p>
+  <p><strong>Subscription level:</strong> {{ subscription_level }}</p>
+
+  {% if next_threshold %}
+    <p>Next tier at ${{ next_threshold }} — you are ${{ remaining }} away.</p>
+    {% if progress %}
+      <div class="progress" role="progressbar"
+           aria-valuenow="{{ progress }}"
+           aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: {{ progress }}%">
+          {{ progress }}%
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <p>🎉 You are at the highest tier!</p>
+  {% endif %}
+</div>
+{% endblock %}
